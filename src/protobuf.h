@@ -98,6 +98,7 @@ void bytelizer_put_pbstruct(bytelizer_ctx_t* ctx, const bytelizer_pbfield_t* pbr
  * @param _tag the field index
  * @param _name the name of the field
  * @param _val the value of the field
+ * @param _len the length of the field
 */
 #define PB_STRING(_tag, _name, _val, _len) \
   {.tag = _tag, .type = bytelizer_pbtype_length_delimited, .subtags = false, .value.length_delimited = { .length = _len, .data = (uint8_t*)_val }}
@@ -107,6 +108,7 @@ void bytelizer_put_pbstruct(bytelizer_ctx_t* ctx, const bytelizer_pbfield_t* pbr
  * @param _tag the field index
  * @param _name the name of the field
  * @param _val the value of the field
+ * @param _len the length of the field
 */
 #define PB_BYTES(_tag, _name, _val, _len) \
   {.tag = _tag, .type = bytelizer_pbtype_length_delimited, .subtags = false, .value.length_delimited = { .length = _len, .data = (uint8_t*)_val }}
