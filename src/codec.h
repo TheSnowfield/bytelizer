@@ -276,7 +276,7 @@ typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size
 #define bytelizer_put_string(ctx, value) \
   bytelizer_put_bytes(ctx, (uint8_t *)value, (uint32_t)strlen(value));
 
-#define bytelizer_skip bytelizer_update_cursor
+#define bytelizer_skip(ctx, size) bytelizer_update_cursor(ctx, size)
 
 /**
  * @brief put bytes into buffer
@@ -288,6 +288,8 @@ void bytelizer_put_bytes(bytelizer_ctx_t* ctx, const uint8_t* const value, uint3
 
 /**
  * @brief put another bytelizer buffer into buffer
+ * @param ctx the bytelizer context
+ * @param value the value
 */
 void bytelizer_put_bytelizer(bytelizer_ctx_t* ctx, bytelizer_ctx_t* value);
 
