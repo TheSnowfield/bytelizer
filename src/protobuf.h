@@ -7,8 +7,8 @@
  * Authors: TheSnowfield <17957399+TheSnowfield@users.noreply.github.com>
  ****************************************************************************/
 
-#ifndef _BYTEIZER_PROTOBUF_H
-#define _BYTEIZER_PROTOBUF_H
+#ifndef _BYTELIZER_PROTOBUF_H
+#define _BYTELIZER_PROTOBUF_H
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -133,4 +133,4 @@ void bytelizer_put_pbstruct(bytelizer_ctx_t* ctx, const bytelizer_pbfield_t* pbr
 #define PBSTRUCT_EXPORT(_name, _fields) \
   const static bytelizer_pbfield_t* _pb_struct_##_name = _fields
 
-#endif /* _BYTEIZER_PROTOBUF_H */
+#endif /* _BYTELIZER_PROTOBUF_H */

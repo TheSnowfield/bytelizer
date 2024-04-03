@@ -10,6 +10,9 @@
 #ifndef _BYTELIZER_CONFIG_H
 #define _BYTELIZER_CONFIG_H
 
+#define BYTELIZER_BIG_ENDIAN 1
+#define BYTELIZER_LITTLE_ENDIAN 0
+
 #ifndef BYTELIZER_REALLOC
   /**
    * @brief Bytelizer realloc size
