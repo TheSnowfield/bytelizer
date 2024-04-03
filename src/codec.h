@@ -36,11 +36,11 @@ typedef struct _bytelizer_ctx_t {
 typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size_t length);
 
 /**
- * @brief bytelizer initialize
+ * @brief bytelizer initialize without force clear
  * @param ctx the bytelizer context
  * @param size the stack buffer size
  */
-#define bytelizer_alloc(ctx, size) { \
+#define bytelizer_alloc_unsafe(ctx, size) \
   uint8_t ctx##_buf[size]; \
   bytelizer_ctx_t* ctx = &(bytelizer_ctx_t) { \
     .stack = ctx##_buf, \
@@ -52,10 +52,17 @@ typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size
   }; { ctx->counter = &ctx->stack_wrotes; memset(ctx##_buf, 0, size); }
 
 /**
- * @brief release heap blocks and clean
+ * @brief bytelizer initialize
+ * @param ctx the bytelizer context
+ * @param size the stack buffer size
+ */
+#define bytelizer_alloc(ctx, size) { bytelizer_alloc_unsafe(ctx, size)
+
+/**
+ * @brief release heap blocks and clean without pairing
  * @param ctx the bytelizer context
  */
-#define bytelizer_clear(ctx) \
+#define bytelizer_clear_unsafe(ctx) \
     bytelizer_destroy(ctx); \
     ctx->stack_wrotes = 0; \
     ctx->total_length = 0; \
@@ -63,15 +70,20 @@ typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size
     ctx->cursor = ctx->stack; \
     ctx->counter = &ctx->stack_wrotes; \
     memset(ctx->stack, 0, ctx->stack_length); \
-  }
 
 /**
- * @brief attach a buffer
+ * @brief release heap blocks and clean
+ * @param ctx the bytelizer context
+ */
+#define bytelizer_clear(ctx) bytelizer_clear_unsafe(ctx) }
+
+/**
+ * @brief attach a buffer without force detach
  * @param ctx the bytelizer context
  * @param buffer the buffer pointer
  * @param size the buffer size
  */
-#define bytelizer_attach(ctx, buffer, size) { \
+#define bytelizer_attach_unsafe(ctx, buffer, size) \
   bytelizer_ctx_t* ctx = &(bytelizer_ctx_t) { \
     .stack = buffer, \
     .stack_length = size, \
@@ -82,10 +94,18 @@ typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size
   }; { ctx->counter = &ctx->stack_wrotes; }
 
 /**
- * @brief release heap blocks and clean
+ * @brief attach a buffer
+ * @param ctx the bytelizer context
+ * @param buffer the buffer pointer
+ * @param size the buffer size
+ */
+#define bytelizer_attach(ctx, buffer, size) { bytelizer_attach_unsafe(ctx, buffer, size)
+
+/**
+ * @brief release heap blocks and clean without pairing
  * @param ctx the bytelizer context
  */
-#define bytelizer_detach(ctx) \
+#define bytelizer_detach_unsafe(ctx) \
     bytelizer_destroy(ctx); \
     ctx->stack_wrotes = 0; \
     ctx->total_length = 0; \
@@ -93,7 +113,12 @@ typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size
     ctx->cursor = ctx->stack; \
     ctx->counter = &ctx->stack_wrotes; \
     memset(ctx->stack, 0, ctx->stack_length); \
-  }
+
+/**
+ * @brief release heap blocks and clean
+ * @param ctx the bytelizer context
+ */
+#define bytelizer_detach(ctx) bytelizer_detach_unsafe(ctx) }
 
 /**
  * @brief get bytelizer length

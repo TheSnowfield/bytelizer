@@ -9,7 +9,7 @@
 
 #include "log.h"
 
-static void __placeholder_log(const char*) { /* do nothing */ }
+static void __placeholder_log(const char* _) { /* do nothing */ }
 bytelizer_log_callback_t __bytelizer_log_callback = &__placeholder_log;
 
 void bytelizer_set_log_callback(bytelizer_log_callback_t cb) {
