@@ -80,7 +80,7 @@ _inline uint64_t _swap_64(uint64_t value) {
 #  define be16toh(x) ntohs(x)
 #  define be32toh(x) ntohl(x)
 #  define be64toh(x) ntohll(x)
-#  define htobe16(x) ntohs(x)
+#  define htobe16(x) htons(x)
 #  define htobe32(x) htonl(x)
 #  define htobe64(x) htonll(x)
 #endif
