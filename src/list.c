@@ -15,7 +15,7 @@
 #include "debug/internal.h"
 #include "list.h"
 
-bytelizer_ret_t list_create(list_ctx_t** ctx) {
+bytelizer_ret_t bytelizer_list_create(list_ctx_t** ctx) {
 
   // validate parameters
   if(ctx == NULL)
@@ -36,7 +36,7 @@ bytelizer_ret_t list_create(list_ctx_t** ctx) {
   return bytelizer_ret_ok;
 }
 
-bytelizer_ret_t list_destroy(list_ctx_t* ctx) {
+bytelizer_ret_t bytelizer_list_destroy(list_ctx_t* ctx) {
   if(ctx == NULL)
     return bytelizer_ret_invalid_parameter;
 
@@ -55,7 +55,7 @@ bytelizer_ret_t list_destroy(list_ctx_t* ctx) {
   return bytelizer_ret_ok;
 }
 
-bytelizer_ret_t list_put(list_ctx_t* ctx, void* data, size_t length, list_node_t** node) {
+bytelizer_ret_t bytelizer_list_put(list_ctx_t* ctx, void* data, size_t length, list_node_t** node) {
   if(ctx == NULL || data == NULL)
     return bytelizer_ret_invalid_parameter;
 
@@ -103,7 +103,7 @@ bytelizer_ret_t list_put(list_ctx_t* ctx, void* data, size_t length, list_node_t
   return bytelizer_ret_ok;
 }
 
-bytelizer_ret_t list_delete(list_ctx_t* ctx, list_node_t* node) {
+bytelizer_ret_t bytelizer_list_delete(list_ctx_t* ctx, list_node_t* node) {
 
   if(ctx == NULL || node == NULL)
     return bytelizer_ret_invalid_parameter;

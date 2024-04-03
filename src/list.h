@@ -31,7 +31,7 @@ typedef struct _list_ctx_t {
  * @param ctx return list context if success
  * @return bytelizer_ret_t
  */
-bytelizer_ret_t list_create(list_ctx_t** ctx);
+bytelizer_ret_t bytelizer_list_create(list_ctx_t** ctx);
 
 /**
  * @brief put data into list
@@ -42,9 +42,9 @@ bytelizer_ret_t list_create(list_ctx_t** ctx);
  * @param node return node pointer
  * @return bytelizer_ret_t
  */
-bytelizer_ret_t list_put(list_ctx_t* ctx, void* data, size_t length, list_node_t** node);
+bytelizer_ret_t bytelizer_list_put(list_ctx_t* ctx, void* data, size_t length, list_node_t** node);
 
-bytelizer_ret_t list_delete(list_ctx_t* ctx, list_node_t* node);
+bytelizer_ret_t bytelizer_list_delete(list_ctx_t* ctx, list_node_t* node);
 
 /**
  * @brief destroy list
@@ -52,7 +52,7 @@ bytelizer_ret_t list_delete(list_ctx_t* ctx, list_node_t* node);
  * @param ctx list context pointer
  * @return bytelizer_ret_t
  */
-bytelizer_ret_t list_destroy(list_ctx_t* ctx);
+bytelizer_ret_t bytelizer_list_destroy(list_ctx_t* ctx);
 
 
 #endif /* _BYTELIZER_LIST_H */

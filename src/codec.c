@@ -56,7 +56,7 @@ static bool __new_block(bytelizer_ctx_t* ctx, uint32_t size) {
     }
 
     // put the new block into list
-    if(!bytelizer_ok(_result, list_put(ctx->blocks, &_block, sizeof(void *), NULL))) {
+    if(!bytelizer_ok(_result, bytelizer_list_put(ctx->blocks, &_block, sizeof(void *), NULL))) {
       __bytelizer_log("failure while trying to append buffer block: code %d", _result);
       
       // cleanup
@@ -99,14 +99,14 @@ bool bytelizer_ensure_available(bytelizer_ctx_t* ctx, size_t request) {
 
       // create a heap
       bytelizer_ret_t _result;
-      if((_result = list_create(&ctx->blocks)) != bytelizer_ret_ok) {
+      if((_result = bytelizer_list_create(&ctx->blocks)) != bytelizer_ret_ok) {
         __bytelizer_log("creating heap buffer failure: code %d", _result);
         return false;
       }
 
       // cleanup
       if(!__new_block(ctx, ALLOC_ALIGNMENT(request))) {
-        list_destroy(ctx->blocks);
+        bytelizer_list_destroy(ctx->blocks);
         ctx->blocks = NULL;
       }
 
@@ -230,5 +230,5 @@ void bytelizer_destroy(bytelizer_ctx_t* ctx) {
     _node = _node->next;
   }
 
-  list_destroy(ctx->blocks);
+  bytelizer_list_destroy(ctx->blocks);
 }
