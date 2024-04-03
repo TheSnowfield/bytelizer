@@ -1,12 +1,18 @@
 ## Bytelizer
-Bytelizer is a binary packaging/unpack library written in modern c, focusing on performance and light.
+Bytelizer is a binary packaging/unpack library written in modern c,  
+focusing on performance and lightweight.
 
 Feature:
  - Anchor for late data insert/fill
- - Barrier
- - Data prefix support
+ - Barrier (or segment/packet)
+ - Length prefix support
  - Static Protobuf structure declaration
  - Endianess
+
+Almost all functions and variants are macrolized or inlined for compiler static optimization.
+
+[![frost](https://img.shields.io/badge/BYTELIZER-OwO-cea7ff)](#)
+[![license](https://img.shields.io/badge/LICENSE-GPLv2-greeen)](./blob/main/LICENSE)
 
 ## Quick Guide
 ```c
