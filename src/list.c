@@ -15,19 +15,19 @@
 #include "debug/internal.h"
 #include "list.h"
 
-bytelizer_ret_t bytelizer_list_create(list_ctx_t** ctx) {
+bytelizer_ret_t bytelizer_list_create(bytelizer_list_ctx_t** ctx) {
 
   // validate parameters
   if(ctx == NULL)
     return bytelizer_ret_invalid_parameter;
 
   // initialize context
-  list_ctx_t* _ctx = malloc(sizeof(list_ctx_t)); {
+  bytelizer_list_ctx_t* _ctx = malloc(sizeof(bytelizer_list_ctx_t)); {
     if(_ctx == NULL)
       return bytelizer_ret_out_of_memory;
 
     // clear buffer
-    memset(_ctx, 0, sizeof(list_ctx_t));
+    memset(_ctx, 0, sizeof(bytelizer_list_ctx_t));
     *ctx = _ctx;
   }
 
@@ -36,14 +36,14 @@ bytelizer_ret_t bytelizer_list_create(list_ctx_t** ctx) {
   return bytelizer_ret_ok;
 }
 
-bytelizer_ret_t bytelizer_list_destroy(list_ctx_t* ctx) {
+bytelizer_ret_t bytelizer_list_destroy(bytelizer_list_ctx_t* ctx) {
   if(ctx == NULL)
     return bytelizer_ret_invalid_parameter;
 
   // free all nodes
-  list_node_t* _node = ctx->head;
+  bytelizer_list_node_t* _node = ctx->head;
   while(_node != NULL) {
-    list_node_t* _next = _node->next;
+    bytelizer_list_node_t* _next = _node->next;
     free(_node);
     _node = _next;
   }
@@ -55,7 +55,7 @@ bytelizer_ret_t bytelizer_list_destroy(list_ctx_t* ctx) {
   return bytelizer_ret_ok;
 }
 
-bytelizer_ret_t bytelizer_list_put(list_ctx_t* ctx, void* data, size_t length, list_node_t** node) {
+bytelizer_ret_t bytelizer_list_put(bytelizer_list_ctx_t* ctx, void* data, size_t length, bytelizer_list_node_t** node) {
   if(ctx == NULL || data == NULL)
     return bytelizer_ret_invalid_parameter;
 
@@ -64,8 +64,8 @@ bytelizer_ret_t bytelizer_list_put(list_ctx_t* ctx, void* data, size_t length, l
 
   // allocate an node + userdata length buffer
   // to reduce memory fragmentation
-  size_t _length = sizeof(list_node_t) + length;
-  list_node_t* _node = malloc(_length); {
+  size_t _length = sizeof(bytelizer_list_node_t) + length;
+  bytelizer_list_node_t* _node = malloc(_length); {
     if(_node == NULL)
       return bytelizer_ret_out_of_memory;
   }
@@ -103,7 +103,7 @@ bytelizer_ret_t bytelizer_list_put(list_ctx_t* ctx, void* data, size_t length, l
   return bytelizer_ret_ok;
 }
 
-bytelizer_ret_t bytelizer_list_delete(list_ctx_t* ctx, list_node_t* node) {
+bytelizer_ret_t bytelizer_list_delete(bytelizer_list_ctx_t* ctx, bytelizer_list_node_t* node) {
 
   if(ctx == NULL || node == NULL)
     return bytelizer_ret_invalid_parameter;

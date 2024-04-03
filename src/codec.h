@@ -28,7 +28,7 @@ typedef struct _bytelizer_ctx_t {
   uint8_t* stack;
   uint32_t stack_wrotes;
   uint32_t stack_length;
-  list_ctx_t* blocks;
+  bytelizer_list_ctx_t* blocks;
   uint8_t* cursor;
   uint32_t* counter;
 } bytelizer_ctx_t;

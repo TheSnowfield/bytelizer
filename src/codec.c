@@ -36,7 +36,7 @@
   | +---  uint8_t* stack;                                |
   |       uint32_t stack_wrotes;                         |
   |       uint32_t stack_length;                         |
-  +-----  list_ctx_t* blocks;                            |
+  +-----  bytelizer_list_ctx_t* blocks;                            |
           uint8_t* cursor;   ----------------------------+
           uint32_t* counter;
         } bytelizer_ctx_t;
@@ -188,7 +188,7 @@ void bytelizer_put_bytelizer(bytelizer_ctx_t* ctx, bytelizer_ctx_t* value) {
   // write block buffer
   if(value->blocks != NULL) {
     
-    list_node_t* _node = value->blocks->head;
+    bytelizer_list_node_t* _node = value->blocks->head;
     while(_node != NULL) {
 
       bytelizer_block_t* _block = *(bytelizer_block_t **)_node->data;
@@ -207,7 +207,7 @@ uint32_t bytelizer_copy_to(void* userdata, bytelizer_ctx_t* ctx, bytelizer_callb
   // write block buffer
   if(ctx->blocks != NULL) {
     
-    list_node_t* _node = ctx->blocks->head;
+    bytelizer_list_node_t* _node = ctx->blocks->head;
     while(_node != NULL) {
 
       bytelizer_block_t* _block = *(bytelizer_block_t **)_node->data;
@@ -224,7 +224,7 @@ void bytelizer_destroy(bytelizer_ctx_t* ctx) {
 
   if(ctx->blocks == NULL) return;
 
-  list_node_t* _node = ctx->blocks->head;
+  bytelizer_list_node_t* _node = ctx->blocks->head;
   while(_node != NULL) {
     free(*(bytelizer_block_t **)_node->data);
     _node = _node->next;
