@@ -15,7 +15,7 @@
 #include "advanced.h"
 #include "debug/internal.h"
 
-_inline static uint32_t _number_tovarint(uint64_t value, uint8_t* varint) {
+_inline static uint32_t __number_tovarint(uint64_t value, uint8_t* varint) {
 
   uint32_t _len = 0;
 
@@ -34,7 +34,7 @@ _inline static uint32_t _number_tovarint(uint64_t value, uint8_t* varint) {
   return _len;
 }
 
-_inline static uint64_t _varint_to_number(uint8_t* varint, uint8_t varint_len) {
+_inline static uint64_t __varint_to_number(uint8_t* varint, uint8_t varint_len) {
   uint64_t _result = 0;
 
   for(size_t i = varint_len - 1; i >= 0 ; --i) {
@@ -47,7 +47,7 @@ _inline static uint64_t _varint_to_number(uint8_t* varint, uint8_t varint_len) {
 
 _inline static void bytelizer_put_varint(bytelizer_ctx_t* ctx, uint64_t value) {
   uint8_t _buffer[10];
-  uint32_t _length = _number_tovarint(value, _buffer);
+  uint32_t _length = __number_tovarint(value, _buffer);
   bytelizer_put_bytes(ctx, _buffer, _length);
 }
 

@@ -11,6 +11,7 @@
 #define _BYTELIZER_ANCHOR_H
 
 #include <stdint.h>
+#include <string.h>
 #include <bytelizer/common.h>
 
 #include "codec.h"
@@ -53,7 +54,7 @@ bytelizer_ctx_t* ctx, uint32_t userdata, uint32_t size) {
     return true;
   }
 
-  log_warning(TAG, "mark an anchor failed, is it out of memory?");
+  __bytelizer_log("mark an anchor failed, is it out of memory?");
   return false;
 }
 
