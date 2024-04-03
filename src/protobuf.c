@@ -91,7 +91,7 @@ void bytelizer_put_pbstruct(bytelizer_ctx_t* ctx, const bytelizer_pbfield_t* pbr
 
         // copy data
         bytelizer_put_bytelizer(ctx, _ctx);
-        bytelizer_destroy(_ctx);
+        bytelizer_clear(_ctx);
         break;
       }
 
