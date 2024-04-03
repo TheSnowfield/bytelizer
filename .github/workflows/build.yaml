@@ -1,0 +1,20 @@
+name: Build
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build_library:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v4
+      name: Checkout Files
+
+    - name: Configure and build the project
+      uses: threeal/cmake-action@v1.2.0
+      with:
+        run-build: true
+        args: |
+          -DBUILD=lib
