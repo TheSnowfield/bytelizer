@@ -36,6 +36,7 @@ bytelizer_alloc(_ctx, 64); {
   bytelizer_put_uint16(_ctx, 0x5678);
   bytelizer_put_uint32(_ctx, 0xDEADBEEF);
 }
+bytelizer_clear(_ctx);
 
 ```
 

@@ -286,10 +286,10 @@ _inline static size_t __get_prefix_length_by_type(bytelizer_prefix_t prefix) {
     case prefix_uint16le: return 2;
     case prefix_uint32be:
     case prefix_uint32le: return 4;
+    default:
+      __bytelizer_log("wrong prefix type enum %d", prefix);
+      return 0;
   }
-
-  __bytelizer_log("wrong prefix type");
-  return 0;
 }
 
 static void __put_prefix(bytelizer_ctx_t* ctx,
