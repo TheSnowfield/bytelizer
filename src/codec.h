@@ -25,9 +25,9 @@ typedef struct _bytelizer_block_t {
 
 typedef struct _bytelizer_ctx_t {
   uint32_t total_length;
+  uint8_t* stack;
   uint32_t stack_wrotes;
   uint32_t stack_length;
-  uint8_t* stack;
   bytelizer_list_ctx_t* blocks;
   uint8_t* cursor;
   uint32_t* counter;
@@ -71,7 +71,7 @@ typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size
  * @param buffer the buffer pointer
  * @param size the buffer size
  */
-#define bytelizer_attach(ctx, buffer, size) \
+#define bytelizer_attach(ctx, buffer, size) { \
   bytelizer_ctx_t* ctx = &(bytelizer_ctx_t) { \
     .stack = buffer, \
     .stack_length = size, \
@@ -80,6 +80,20 @@ typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size
     .blocks = NULL, \
     .cursor = buffer, \
   }; { ctx->counter = &ctx->stack_wrotes; }
+
+/**
+ * @brief release heap blocks and clean
+ * @param ctx the bytelizer context
+ */
+#define bytelizer_detach(ctx) \
+    bytelizer_destroy(ctx); \
+    ctx->stack_wrotes = 0; \
+    ctx->total_length = 0; \
+    ctx->blocks = NULL; \
+    ctx->cursor = ctx->stack; \
+    ctx->counter = &ctx->stack_wrotes; \
+    memset(ctx->stack, 0, ctx->stack_length); \
+  }
 
 /**
  * @brief get bytelizer length
