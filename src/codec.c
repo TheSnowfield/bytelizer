@@ -220,7 +220,7 @@ uint32_t bytelizer_copy_to(void* userdata, bytelizer_ctx_t* ctx, bytelizer_callb
   return ctx->total_length;
 }
 
-void bytelizer_destroy(bytelizer_ctx_t* ctx) {
+void bytelizer_destroy_unsafe(bytelizer_ctx_t* ctx) {
 
   if(ctx->blocks == NULL) return;
 

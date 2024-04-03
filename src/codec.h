@@ -63,7 +63,7 @@ typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size
  * @param ctx the bytelizer context
  */
 #define bytelizer_clear_unsafe(ctx) \
-    bytelizer_destroy(ctx); \
+    bytelizer_destroy_unsafe(ctx); \
     ctx->stack_wrotes = 0; \
     ctx->total_length = 0; \
     ctx->blocks = NULL; \
@@ -106,7 +106,7 @@ typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size
  * @param ctx the bytelizer context
  */
 #define bytelizer_detach_unsafe(ctx) \
-    bytelizer_destroy(ctx); \
+    bytelizer_destroy_unsafe(ctx); \
     ctx->stack_wrotes = 0; \
     ctx->total_length = 0; \
     ctx->blocks = NULL; \
@@ -308,9 +308,11 @@ bool bytelizer_ensure_available(bytelizer_ctx_t* ctx, size_t request);
 uint32_t bytelizer_copy_to(void* userdata, bytelizer_ctx_t* ctx, bytelizer_callback_copy_t callback);
 
 /**
- * @brief dectroy bytelizer
+ * @brief destroy bytelizer without pairing
  * @param ctx the bytelizer context
 */
-void bytelizer_destroy(bytelizer_ctx_t* ctx);
+void bytelizer_destroy_unsafe(bytelizer_ctx_t* ctx);
+
+#define bytelizer_destroy(ctx) bytelizer_destroy_unsafe(ctx); }
 
 #endif /* _BYTELIZER_CODEC_H */
