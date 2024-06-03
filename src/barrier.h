@@ -47,7 +47,7 @@ bytelizer_ctx_t* ref, bytelizer_prefix_t prefix) {
     return true;
   }
 
-  ___bytelizer_log("enter barrier failed.");
+  __bytelizer_log("enter barrier failed.");
   return false;
 }
 
@@ -86,7 +86,7 @@ static bool __barrier_leave(bytelizer_barrier_t* barrier, uint32_t offset) {
       break;
 
     default:
-      ___bytelizer_log("unsupported prefix type: %d", barrier->prefix_lentype);
+     //___bytelizer_log("unsupported prefix type: %d", barrier->prefix_lentype);
       return false;
   }
 
