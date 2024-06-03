@@ -376,7 +376,6 @@ bytelizer_prefix_t* base_type, bytelizer_prefix_t* length_type) {
 static bool __generate_prefix(bytelizer_ctx_t* ctx,
 bytelizer_prefix_t prefix, uint32_t srcsize) {
 
-  uint32_t _value;
   bytelizer_prefix_t _basetype, _lentype;
 
   // get prefix args

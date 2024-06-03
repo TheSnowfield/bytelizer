@@ -86,7 +86,7 @@ static bool __barrier_leave(bytelizer_barrier_t* barrier, uint32_t offset) {
       break;
 
     default:
-     //___bytelizer_log("unsupported prefix type: %d", barrier->prefix_lentype);
+     __bytelizer_log("unsupported prefix type: %d", barrier->prefix_lentype);
       return false;
   }
 
