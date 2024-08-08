@@ -15,7 +15,7 @@
 #include <bytelizer/error.h>
 #include "codec.h"
 #include "bitwise.h"
-#include "debug/internal.h"
+#include "debug/log.h"
 
 #define MKFLAG(x) (1 << x)
 

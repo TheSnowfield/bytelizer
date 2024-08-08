@@ -13,7 +13,7 @@
 #include "codec.h"
 #include "protobuf.h"
 #include "advanced.h"
-#include "debug/internal.h"
+#include "debug/log.h"
 
 _inline static uint32_t __number_tovarint(uint64_t value, uint8_t* varint) {
 

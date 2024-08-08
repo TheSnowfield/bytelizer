@@ -13,7 +13,7 @@
 
 #include <bytelizer/common.h>
 #include <bytelizer/error.h>
-#include "debug/internal.h"
+#include "debug/log.h"
 #include "list.h"
 #include "codec.h"
 

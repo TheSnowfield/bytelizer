@@ -12,7 +12,7 @@
 #include <stdint.h>
 
 #include <bytelizer/error.h>
-#include "debug/internal.h"
+#include "debug/log.h"
 #include "list.h"
 
 bytelizer_ret_t bytelizer_list_create(bytelizer_list_ctx_t** ctx) {

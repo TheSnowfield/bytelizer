@@ -10,15 +10,13 @@
 #ifndef _BYTELIZER_DEBUG_LOG_H
 #define _BYTELIZER_DEBUG_LOG_H
 
+#include <stdarg.h>
 #include <bytelizer/common.h>
 
-typedef void (* bytelizer_log_callback_t)(const char* str);
-
-/**
- * @brief set log callback
- *
- * @param cb the callback
- */
-void bytelizer_set_log_callback(bytelizer_log_callback_t cb);
+#ifndef BYTELIZER_ENABLE_LOG
+  #define __bytelizer_log(__x)
+#else
+  extern void __bytelizer_log(const char* str, ...);
+#endif /* BYTELIZER_ENABLE_LOG */
 
 #endif /* _BYTELIZER_DEBUG_LOG_H */

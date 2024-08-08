@@ -17,7 +17,7 @@
 #include "advanced.h"
 #include "anchor.h"
 #include "bitwise.h"
-#include "debug/internal.h"
+#include "debug/log.h"
 
 typedef struct {
   bytelizer_ctx_t* ref;

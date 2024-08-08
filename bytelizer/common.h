@@ -26,8 +26,8 @@
 #ifndef BYTELIZER_INLINE_FUNCTIONS
   /**
    * @brief Force inline functions
-   * Inline functions always can reduce the frequency of calling the function,
-   * Improving the performance while increasing the program size.
+   * Inline functions always can reduce the calling frequency of the function,
+   * Improving the performance and increasing the program size.
    */
   #define BYTELIZER_INLINE_FUNCTIONS true
 #endif
