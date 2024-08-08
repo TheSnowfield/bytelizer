@@ -73,7 +73,7 @@ void bytelizer_put_pbstruct(bytelizer_ctx_t* ctx, const bytelizer_pbfield_t* pbr
  * @param _val the value of the field
 */
 #define PB_FLOAT(_tag, _name, _val) \
-  PB_FIXED32(_tag, _name, (*(uint32_t *)_val));
+  PB_FIXED32(_tag, _name, (*(uint32_t *)_val))
 
 /**
  * @brief define a double field
@@ -82,7 +82,7 @@ void bytelizer_put_pbstruct(bytelizer_ctx_t* ctx, const bytelizer_pbfield_t* pbr
  * @param _val the value of the field
 */
 #define PB_DOUBLE(_tag, _name, _val) \
-  PB_FIXED64(_tag, _name, (*(uint64_t *)_val));
+  PB_FIXED64(_tag, _name, (*(uint64_t *)_val))
 
 /**
  * @brief define a string field
