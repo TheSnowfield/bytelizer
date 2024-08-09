@@ -22,10 +22,10 @@ typedef enum {
 } bytelizer_pbtype_t;
 
 typedef struct _bytelizer_pfield_t {
-  const uint32_t tag;
-  const bytelizer_pbtype_t type;
-  const bool subtags;
-  const union {
+  uint32_t tag;
+  bytelizer_pbtype_t type;
+  bool subtags;
+  union {
     uint64_t varint;
     uint64_t fixed64;
     struct {

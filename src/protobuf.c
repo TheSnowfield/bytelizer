@@ -51,6 +51,25 @@ _inline static void bytelizer_put_varint(bytelizer_ctx_t* ctx, uint64_t value) {
   bytelizer_put_bytes(ctx, _buffer, _length);
 }
 
+_inline static void bytelizer_get_varint(bytelizer_ctx_t* ctx, uint64_t* value) {
+  
+  uint8_t _b = 0;
+  uint64_t _value = 0;
+
+  do {
+
+    // get one byte
+    bytelizer_get_uint8(ctx, &_b);
+
+    // teardown varint bytes
+    _value <<= 7;
+    _value |= _b & 0x7f;
+
+  } while((_b & 0b10000000) > 0);
+
+  if(value) *value = _value;
+}
+
 void bytelizer_put_pbstruct(bytelizer_ctx_t* ctx, const bytelizer_pbfield_t* pbroot) {
 
   if(pbroot == NULL) return;
@@ -102,4 +121,72 @@ void bytelizer_put_pbstruct(bytelizer_ctx_t* ctx, const bytelizer_pbfield_t* pbr
     ++pbroot;
   }
 
+}
+
+bool bytelizer_get_pbstruct(bytelizer_ctx_t* ctx, bytelizer_pbfield_t* pbroot) {
+
+  if(pbroot == NULL) return false;
+  
+  while(pbroot->tag != 0) {
+
+    // get the tag
+    uint64_t _varint = 0;
+    bytelizer_get_varint(ctx, &_varint);
+    bytelizer_pbtype_t _type = (bytelizer_pbtype_t)(_varint & 0b111);
+    uint32_t _tag = ((uint32_t)_varint) >> 3;
+
+    // strict type check
+    if(pbroot->tag != _tag || pbroot->type != _type) {
+      return false;
+    }
+
+    // set the value
+    switch(pbroot->type) {
+
+      case bytelizer_pbtype_varint: {
+        uint64_t _value = 0;
+        bytelizer_get_varint(ctx, &_value);
+        pbroot->value.varint = _value;
+        break;
+      }
+
+      case bytelizer_pbtype_32bit: {
+        uint32_t _value = 0;
+        bytelizer_get_uint32(ctx, &_value);
+        pbroot->value.fixed32 = _value;
+        break;
+      }
+      
+      case bytelizer_pbtype_64bit: {
+        uint64_t _value = 0;
+        bytelizer_get_uint64(ctx, &_value);
+        pbroot->value.fixed64= _value;
+      }
+
+      case bytelizer_pbtype_length_delimited: {
+        
+        bytelizer_get_varint(ctx, &_varint);
+
+        // pure bytes
+        if(!pbroot->subtags) {
+          // assume the buffer is linear
+          pbroot->value.length_delimited.data = ctx->cursor;
+          pbroot->value.length_delimited.length = (uint32_t)_varint;
+          bytelizer_update_cursor(ctx, (uint32_t)_varint);
+          break;
+        }
+
+        // if contains sub tags
+        // try decode the struct recursively
+        bytelizer_get_pbstruct(ctx, pbroot->value.message);
+        break;
+      }
+
+      default:
+    }
+
+    ++pbroot;
+  }
+
+  return true;
 }
