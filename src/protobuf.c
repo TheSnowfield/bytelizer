@@ -182,7 +182,8 @@ bool bytelizer_get_pbstruct(bytelizer_ctx_t* ctx, bytelizer_pbfield_t* pbroot) {
         break;
       }
 
-      default:
+      default: 
+        break;
     }
 
     ++pbroot;
