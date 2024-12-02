@@ -246,12 +246,28 @@ typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size
   bytelizer_put_value(ctx, int8_t, value)
 
 /**
+ * @brief get int8_t from the buffer as platform endianness
+ * @param ctx the bytelizer context
+ * @param value the value
+*/
+#define bytelizer_get_int8(ctx, value) \
+  bytelizer_get_value(ctx, int8_t, value)
+
+/**
  * @brief put int16 into the buffer as platform endianness
  * @param ctx the bytelizer context
  * @param value the value
 */
 #define bytelizer_put_int16(ctx, value) \
   bytelizer_put_value(ctx, int16_t, value)
+
+/**
+ * @brief get int16_t from the buffer as platform endianness
+ * @param ctx the bytelizer context
+ * @param value the value
+*/
+#define bytelizer_get_int16(ctx, value) \
+  bytelizer_get_value(ctx, int16_t, value)
 
 /**
  * @brief put int32 into the buffer as platform endianness
@@ -262,12 +278,29 @@ typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size
   bytelizer_put_value(ctx, int32_t, value)
 
 /**
+ * @brief get int32_t from the buffer as platform endianness
+ * @param ctx the bytelizer context
+ * @param value the value
+*/
+#define bytelizer_get_int32(ctx, value) \
+  bytelizer_get_value(ctx, int32_t, value)
+
+
+/**
  * @brief put int64 into the buffer as platform endianness
  * @param ctx the bytelizer context
  * @param value the value
 */
 #define bytelizer_put_int64(ctx, value) \
   bytelizer_put_value(ctx, int64_t, value)
+
+/**
+ * @brief get int64_t from the buffer as platform endianness
+ * @param ctx the bytelizer context
+ * @param value the value
+*/
+#define bytelizer_get_int64(ctx, value) \
+  bytelizer_get_value(ctx, int64_t, value)
 
 /**
  * @brief put float into the buffer as platform endianness
