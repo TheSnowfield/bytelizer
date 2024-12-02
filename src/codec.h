@@ -174,7 +174,7 @@ typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size
   value = *(type *)cursor;
 
 /**
- * @brief put uint8
+ * @brief put uint8 into the buffer as platform endianness
  * @param ctx the bytelizer context
  * @param value the value
 */
@@ -182,7 +182,7 @@ typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size
   bytelizer_put_value(ctx, uint8_t, value)
 
 /**
- * @brief get uint8
+ * @brief get uint8 from the buffer as platform endianness
  * @param ctx the bytelizer context
  * @param value the value
 */
@@ -198,7 +198,7 @@ typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size
   bytelizer_put_value(ctx, uint16_t, value)
 
 /**
- * @brief get uint16 into the buffer as platform endianness
+ * @brief get uint16 from the buffer as platform endianness
  * @param ctx the bytelizer context
  * @param value the value
 */
@@ -214,7 +214,7 @@ typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size
   bytelizer_put_value(ctx, uint32_t, value)
 
 /**
- * @brief get uint32 into the buffer as platform endianness
+ * @brief get uint32 from the buffer as platform endianness
  * @param ctx the bytelizer context
  * @param value the value
 */
@@ -230,7 +230,7 @@ typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size
   bytelizer_put_value(ctx, uint64_t, value)
 
 /**
- * @brief get uint64 into the buffer as platform endianness
+ * @brief get uint64 from the buffer as platform endianness
  * @param ctx the bytelizer context
  * @param value the value
 */
@@ -278,7 +278,7 @@ typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size
   bytelizer_put_value(ctx, float, value)
   
 /**
- * @brief get float into the buffer as platform endianness
+ * @brief get float from the buffer as platform endianness
  * @param ctx the bytelizer context
  * @param value the value
 */
@@ -293,7 +293,7 @@ typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size
 #define bytelizer_put_double(ctx, value) \
   bytelizer_put_value(ctx, double, value)
 /**
- * @brief get double into the buffer as platform endianness
+ * @brief get double from the buffer as platform endianness
  * @param ctx the bytelizer context
  * @param value the value
 */
