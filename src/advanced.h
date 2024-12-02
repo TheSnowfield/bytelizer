@@ -111,6 +111,22 @@ typedef enum {
   bytelizer_put_value(ctx, int64_t, bitwise_le64(value))
 
 /**
+ * @brief put float into the buffer as little endian
+ * @param ctx the bytelizer context
+ * @param value the value
+*/
+#define bytelizer_put_float_le(ctx, value) \
+  bytelizer_put_value(ctx, float, bitwise_le32(value))
+
+/**
+ * @brief put double into the buffer as little endian
+ * @param ctx the bytelizer context
+ * @param value the value
+*/
+#define bytelizer_put_double_le(ctx, value) \
+  bytelizer_put_value(ctx, double, bitwise_le64(value))
+
+/**
  * @brief put uint16 into the buffer as big endian
  * @param ctx the bytelizer context
  * @param value the value
@@ -157,6 +173,22 @@ typedef enum {
 */
 #define bytelizer_put_int64_be(ctx, value) \
   bytelizer_put_value(ctx, int64_t, bitwise_be64(value))
+
+/**
+ * @brief put float into the buffer as big endian
+ * @param ctx the bytelizer context
+ * @param value the value
+*/
+#define bytelizer_put_float_be(ctx, value) \
+  bytelizer_put_value(ctx, float, bitwise_be32(value))
+
+/**
+ * @brief put double into the buffer as big endian
+ * @param ctx the bytelizer context
+ * @param value the value
+*/
+#define bytelizer_put_double_be(ctx, value) \
+  bytelizer_put_value(ctx, double, bitwise_be64(value))
 
 /**
  * @brief get uint16 from the buffer as little endian
@@ -219,6 +251,26 @@ typedef enum {
 }
 
 /**
+ * @brief get float from the buffer as little endian
+ * @param ctx the bytelizer context
+ * @param value the value
+*/
+#define bytelizer_get_float_le(ctx, value) { \
+  bytelizer_get_value(ctx, float, value); \
+  *value = bitwise_le32(*value); \
+}
+
+/**
+ * @brief get double from the buffer as little endian
+ * @param ctx the bytelizer context
+ * @param value the value
+*/
+#define bytelizer_get_double_le(ctx, value) { \
+  bytelizer_get_value(ctx, double, value); \
+  *value = bitwise_le64(*value); \
+}
+
+/**
  * @brief get uint16 from the buffer as big endian
  * @param ctx the bytelizer context
  * @param value the value
@@ -275,6 +327,26 @@ typedef enum {
 */
 #define bytelizer_get_int64_be(ctx, value) { \
   bytelizer_get_value(ctx, int64_t, value); \
+  *value = bitwise_be64(*value); \
+}
+
+/**
+ * @brief get float from the buffer as big endian
+ * @param ctx the bytelizer context
+ * @param value the value
+*/
+#define bytelizer_get_float_be(ctx, value) { \
+  bytelizer_get_value(ctx, float, value); \
+  *value = bitwise_be32(*value); \
+}
+
+/**
+ * @brief get double from the buffer as big endian
+ * @param ctx the bytelizer context
+ * @param value the value
+*/
+#define bytelizer_get_double_be(ctx, value) { \
+  bytelizer_get_value(ctx, double, value); \
   *value = bitwise_be64(*value); \
 }
 
@@ -424,7 +496,7 @@ uint8_t* value, uint32_t length, bytelizer_prefix_t prefix) {
 
     // teardown one byte into high and low parts
     // example: 0xE9 became 0xE and 0x9
-    uint8_t _part = _byte >> (1 - ((_counter & 1)) << 2);
+    uint8_t _part = _byte >> ((1 - ((_counter & 1))) << 2);
 
     // match the result from the hex table
     ctx->cursor[_counter] = _hex_table[_part & 0x0F];
