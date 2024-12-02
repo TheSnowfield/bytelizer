@@ -269,6 +269,37 @@ typedef void (* bytelizer_callback_copy_t)(void* userdata, uint8_t* buffer, size
   bytelizer_put_value(ctx, int64_t, value)
 
 /**
+ * @brief put float into the buffer as platform endianness
+ * @param ctx the bytelizer context
+ * @param value the value
+*/
+#define bytelizer_put_float(ctx, value) \
+  bytelizer_put_value(ctx, float, value)
+  
+/**
+ * @brief get float into the buffer as platform endianness
+ * @param ctx the bytelizer context
+ * @param value the value
+*/
+#define bytelizer_get_float(ctx, value) \
+  bytelizer_get_value(ctx, float, value)
+
+/**
+ * @brief put double into the buffer as platform endianness
+ * @param ctx the bytelizer context
+ * @param value the value
+*/
+#define bytelizer_put_double(ctx, value) \
+  bytelizer_put_value(ctx, double, value)
+/**
+ * @brief get double into the buffer as platform endianness
+ * @param ctx the bytelizer context
+ * @param value the value
+*/
+#define bytelizer_get_double(ctx, value) \
+  bytelizer_get_value(ctx, double, value)
+
+/**
  * @brief put string into buffer
  * @param ctx the bytelizer context
  * @param value the value
