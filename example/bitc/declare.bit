@@ -1,0 +1,50 @@
+// Example
+// Declare structs
+
+declare mystruct:bytes {
+	
+	/* default fill with 0xDEADBEEF */
+	uint32 magic 0xDEADBEEF;
+	
+	/* default to 0 with 'unset' state */
+	uint32 date;
+}
+
+[mode: pack]
+[name: example_struct] bytes {
+	
+	/* insert 'mystruct'
+	 * warning is expected: 'date' is unset, initialized to 0
+	 */
+	mystruct;
+	
+	/* insert 'mystruct' with a overriding value
+	 * it equals:
+	 * mystruct.magic = 0xDEADBEEF;
+	 * mystruct.date  = 0x11223344;
+	 */
+	mystruct {
+		date 0x11223344;
+	}
+	
+}
+
+declare test:mystruct {
+	uint32 newfield 0x44332211;
+}
+
+[mode: pack]
+[name: example_struct_inherit] bytes {
+	
+	/* inherited and insert 'test' with a overriding value and a newfield
+	 * it equals:
+	 * mystruct.magic     = 0xDEADBEEF;
+	 * mystruct.date      = 0x11223344;
+	 * mystruct.newfield  = 0x44332211;
+	 */
+	test {
+		date 0x11223344;
+	}
+	
+}
+

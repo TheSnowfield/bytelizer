@@ -1,0 +1,43 @@
+// Example
+// Embedding Plain Hex Bytes in the template
+
+[mode: pack]
+[name: example_embedded_bytes] bytes {
+
+  /* plain bytes */
+	6f c9 f9 64 4b c8 87 14 ec ee b7 39 25 67 27 2e
+	0c f7 24 e8 c7 14 b0 5e d1 db 73 ff 02 f3 be c8
+	80 8b 68 28 14 9e 2d a6 11 30 e3 8b c3 9f 35 43
+	84 f6 11 da 4a 48 65 75 ca df e1 df fb f6 80 53
+	43 5f e4 9d 8d 76 b8 ca 46 05 da 81 44 12 57 37
+	72 15 22 dc 7f e3 e7 1e 4d ac 65 19 7c 34 58 33
+}
+
+[mode: pack]
+[name: example_hybird] bytes {
+
+	/* insert a uint32 LE zeros */
+	uint32 0x00000000;
+
+	/* insert a uint32 LE 0xFFFFFFFF (with attr uint32-prefix-be) */
+	[with-uint32-prefix-be]
+	uint32 0xFFFFFFFF;
+
+	/* insert a byte block */
+	bytes {
+		uint32 0x11223344;
+	}
+	
+	/* more complex things:
+	 * insert plain bytes within a byte block 
+	 * and the block has an attr uint32-prefix-be outside
+	 */
+
+	[with-uint32-prefix-be] bytes {
+		6f c9 f9 64 4b c8 87 14 ec ee b7 39 25 67 27 2e
+		0c f7 24 e8 c7 14 b0 5e d1 db 73 ff 02 f3 be c8
+	}
+
+}
+
+

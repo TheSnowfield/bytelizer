@@ -1,0 +1,7 @@
+// Example
+// Hello world!
+
+[mode: pack]
+[name: example_hello_world] bytes {
+	string "Hello World!";
+}
