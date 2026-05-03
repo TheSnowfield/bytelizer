@@ -17,4 +17,4 @@ jobs:
       with:
         run-build: true
         args: |
-          -DBUILD=lib
+          -DBUILD=all
