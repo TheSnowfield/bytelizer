@@ -6,20 +6,10 @@ set(CMAKE_C_STANDARD 17)
 # all useful directories
 set(BYTELIZER_ADDITIONAL_INC_DIR "")
 set(BYTELIZER_LIBRARY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
+set(BYTELIZER_BITCOMPILER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bitc)
 
 list(APPEND BYTELIZER_ADDITIONAL_INC_DIR ${BYTELIZER_THIRDLIB_DIR})
 list(APPEND BYTELIZER_ADDITIONAL_INC_DIR ${BYTELIZER_PREBUILD_DIR})
-
-# search source files
-file(GLOB_RECURSE BYTELIZER_SRC src/*.c)
-  list(APPEND BYTELIZER_SRC ${BYTELIZER_LIB_SRC})
-
-# add include directories
-include_directories(
-  ${CMAKE_SOURCE_DIR}
-  ${CMAKE_SOURCE_DIR}/src
-  ${BYTELIZER_ADDITIONAL_INC_DIR}
-)
 
 # build config
 if(NOT DEFINED CONFIG OR CONFIG STREQUAL "debug")
@@ -39,6 +29,11 @@ endif()
 
 if(BUILD STREQUAL "lib")
   include(${BYTELIZER_LIBRARY_DIR}/CMakeLists.txt)
+elseif(BUILD STREQUAL "bitc")
+  include(${BYTELIZER_BITCOMPILER_DIR}/CMakeLists.txt)
+elseif(BUILD STREQUAL "all")
+	include(${BYTELIZER_LIBRARY_DIR}/CMakeLists.txt)
+	include(${BYTELIZER_BITCOMPILER_DIR}/CMakeLists.txt)
 else()
-  message(FATAL_ERROR "Unknown build type, please specify `-DBUILD=test|lib`")
+  message(FATAL_ERROR "Unknown build type, please specify `-DBUILD=lib|bitc|all`")
 endif()
