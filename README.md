@@ -14,7 +14,7 @@ Almost all functions and variants are macrolized or inlined for compiler static 
 [![frost](https://img.shields.io/badge/BYTELIZER-OwO-cea7ff)](#)
 [![license](https://img.shields.io/badge/LICENSE-GPLv2-greeen)](./blob/main/LICENSE)
 
-## Quick Guide
+## Quick Guide (In C)
 ```c
 typedef struct {
   uint16_t a;
@@ -37,6 +37,17 @@ bytelizer_alloc(_ctx, 64); {
   bytelizer_put_uint32(_ctx, 0xDEADBEEF);
 }
 bytelizer_destroy(_ctx);
+
+```
+
+## Quick Guide (In BIT)
+```c
+[mode: pack]
+[name: pack_example] bytes {
+  uint16 0x1234;
+  uint16 0x5678;
+  uint32 0xDEADBEEF;
+}
 
 ```
 
